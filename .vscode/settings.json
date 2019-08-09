@@ -1,0 +1,7 @@
+{
+	"omnisharp.autoStart": true,
+	"files.exclude": {
+		"**/bin": true,
+		"**/obj": true
+	}
+}
