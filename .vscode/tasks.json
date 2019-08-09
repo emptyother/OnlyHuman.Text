@@ -7,29 +7,27 @@
 			"label": "Build",
 			"command": "dotnet build",
 			"type": "shell",
-			"group": "build",
+			"group": {
+				"isDefault": true,
+				"kind": "build"
+			},
 			"presentation": {
 				"reveal": "silent"
 			},
 			"problemMatcher": "$msCompile"
 		},
 		{
-			"type": "script",
-			"label": "Run Test",
-			"scriptType": "powershell",
-			"cmdLine": "powershell .\\test.ps1 --NoProfile --NoLogo",
-			"path": "/",
-			"fileName": "test.ps1",
-			"scriptFile": true,
-			"requiresArgs": false,
-			"uri": {
-				"$mid": 1,
-				"fsPath": ".\\Tests\\test.ps1",
-				"_sep": 1,
-				"path": "./Tests/test.ps1",
-				"scheme": "file"
+			"label": "Test",
+			"type": "shell",
+			"group": {
+				"isDefault": true,
+				"kind": "test"
 			},
-			"problemMatcher": []
+			"command": "pwsh ${cwd}\\Tests\\test.ps1 --NoProfile --NoLogo",
+			"dependsOn": [
+				"Build"
+			],
+			"problemMatcher": "$pester"
 		}
 	]
 }

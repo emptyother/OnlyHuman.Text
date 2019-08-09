@@ -7,13 +7,14 @@ using System.Management.Automation.Runspaces;
 namespace OnlyHuman
 {
 	[Cmdlet(VerbsCommon.Join, "Lines")]
-	[OutputType(typeof(string[]))]
+	[OutputType(typeof(string))]
 	public class JoinLinesCmdletCommand : PSCmdlet
 	{
 		[Parameter(
 			Mandatory = true,
 			Position = 0,
-			ValueFromPipeline = true
+			ValueFromPipeline = true,
+			ValueFromPipelineByPropertyName = true
 		)]
 		public string InputText { get; set; }
 		private List<string> strcol;
