@@ -11,8 +11,7 @@
 			"script": "${workspaceFolder}\\Tests\\test.ps1",
 			"args": [],
 			"cwd": "${workspaceFolder}",
-			"createTemporaryIntegratedConsole": true,
-			"preLaunchTask": "Build"
+			"createTemporaryIntegratedConsole": true
 		}
 	]
 }
