@@ -4,21 +4,21 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
+			"type": "shell",
 			"label": "Build",
 			"command": "dotnet build",
-			"type": "shell",
 			"group": {
 				"isDefault": true,
 				"kind": "build"
 			},
 			"presentation": {
-				"reveal": "silent"
+				"reveal": "always"
 			},
 			"problemMatcher": "$msCompile"
 		},
 		{
-			"label": "Test",
 			"type": "shell",
+			"label": "Test",
 			"group": {
 				"isDefault": true,
 				"kind": "test"

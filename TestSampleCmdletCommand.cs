@@ -16,7 +16,7 @@ namespace OnlyHuman
 			ValueFromPipeline = true,
 			ValueFromPipelineByPropertyName = true
 		)]
-		public string InputText { get; set; }
+		public PSObject InputText { get; set; }
 		private List<string> strcol;
 
 		// This method gets called once for each cmdlet in the pipeline when the pipeline starts executing
@@ -30,19 +30,24 @@ namespace OnlyHuman
 		// This method will be called for each input received from the pipeline to this cmdlet; if no input is received, this method is not called
 		protected override void ProcessRecord()
 		{
-			if (string.IsNullOrWhiteSpace(InputText))
-			{
-				WriteObject("Paragraph:");
-				var fullstring = string.Join(" ", strcol);
-				WriteObject(fullstring);
-				strcol.Clear();
-				WriteObject("BLANK");
-				WriteObject(InputText);
-			}
-			else
-			{
-				strcol.Add(InputText.Trim());
-			}
+			WriteVerbose("Begin Processing...");
+			WriteVerbose(InputText.ToString());
+			WriteVerbose(InputText.BaseObject.GetType().ToString());
+			//var inputText = (string)InputText;
+			// var inputText = "";
+			// if (string.IsNullOrWhiteSpace(inputText))
+			// {
+			// 	WriteObject("Paragraph:");
+			// 	var fullstring = string.Join(" ", strcol);
+			// 	WriteObject(fullstring);
+			// 	strcol.Clear();
+			// 	WriteObject("BLANK");
+			// 	WriteObject(InputText);
+			// }
+			// else
+			// {
+			// 	strcol.Add(inputText.Trim());
+			// }
 		}
 
 		// This method will be called once at the end of pipeline execution; if no input is received, this method is not called
