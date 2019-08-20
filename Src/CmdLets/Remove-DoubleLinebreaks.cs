@@ -16,6 +16,7 @@ namespace OnlyHuman.Text
 
 		protected override void BeginProcessing()
 		{
+			PreviousLineWasWhitespace = false;
 		}
 
 		protected override void ProcessRecord()
@@ -35,6 +36,7 @@ namespace OnlyHuman.Text
 				}
 				// If the current line is a whitespace, and previous line wasn't.
 				WriteObject(line);
+				PreviousLineWasWhitespace = true;
 			}
 		}
 

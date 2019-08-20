@@ -11,7 +11,7 @@
 	Description       = 'Various text-formatting tools.'
 	PowerShellVersion = '6.0.0'
 	FunctionsToExport = @()
-	CmdletsToExport   = @('Join-Lines')
+	CmdletsToExport   = '*'
 	VariablesToExport = '*'
 	AliasesToExport   = @()
 	PrivateData       = @{

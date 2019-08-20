@@ -13,10 +13,11 @@ namespace OnlyHuman.Text
 		)]
 		public string[] InputText { get; set; }
 
-		private List<string> textBuffer;
+		private List<string> TextBuffer;
 
 		protected override void BeginProcessing()
 		{
+			TextBuffer = new List<string>();
 		}
 
 		protected override void ProcessRecord()
@@ -29,7 +30,7 @@ namespace OnlyHuman.Text
 					WriteObject(line);
 					continue;
 				}
-				textBuffer.Add(line);
+				TextBuffer.Add(line);
 			}
 		}
 
@@ -40,14 +41,14 @@ namespace OnlyHuman.Text
 
 		private void FlushTextBufferIfMultipleLineBreaks()
 		{
-			if (textBuffer.Count > 1)
+			if (TextBuffer.Count > 1)
 			{
-				foreach (var line in textBuffer)
+				foreach (var line in TextBuffer)
 				{
 					WriteObject(line);
 				}
 			}
-			textBuffer.Clear();
+			TextBuffer.Clear();
 		}
 	}
 }
