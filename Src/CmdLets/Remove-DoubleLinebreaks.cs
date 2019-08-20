@@ -2,6 +2,9 @@
 
 namespace OnlyHuman.Text
 {
+	/// <summary>
+	/// Remove double (or more) line breaks but leaves single linebreaks.
+	/// </summary>
 	[Cmdlet(VerbsCommon.Remove, "DoubleLineBreaks")]
 	[OutputType(typeof(string))]
 	public class Remove_DoubleLinebreaks : PSCmdlet
@@ -30,7 +33,8 @@ namespace OnlyHuman.Text
 					continue;
 				}
 				// If currentline is a whitespace..
-				if(PreviousLineWasWhitespace) {
+				if (PreviousLineWasWhitespace)
+				{
 					// Dont output whitespaced lines if previous line was whitespace.
 					continue;
 				}

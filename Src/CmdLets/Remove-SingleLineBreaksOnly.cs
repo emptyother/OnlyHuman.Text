@@ -3,6 +3,10 @@ using System.Management.Automation;
 
 namespace OnlyHuman.Text
 {
+	/// <summary>
+	/// Remove linebreaks, but only if both the previous and the next line
+	/// has text.
+	/// </summary>
 	[Cmdlet(VerbsCommon.Remove, "SingleLineBreaksOnly")]
 	[OutputType(typeof(string))]
 	public class Remove_SingleLineBreaksOnly : PSCmdlet
