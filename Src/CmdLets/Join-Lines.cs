@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
+﻿using System.Collections.Generic;
 using System.Management.Automation;
-using System.Management.Automation.Runspaces;
 
-namespace OnlyHuman
+namespace OnlyHuman.Text
 {
 	/// <summary>
 	/// Join lines to create paragraphs. If two lines don't have an empty line between them,
@@ -13,7 +10,7 @@ namespace OnlyHuman
 	/// </summary>
 	[Cmdlet(VerbsCommon.Join, "Lines")]
 	[OutputType(typeof(string))]
-	public class JoinLinesCmdletCommand : PSCmdlet
+	public class Join_Lines : PSCmdlet
 	{
 		/// <summary>
 		/// An array of text that should be turned into paragraphs.
@@ -25,33 +22,24 @@ namespace OnlyHuman
 		)]
 		public string[] InputText { get; set; }
 
-		/// <summary>
-		/// Holds the text while building a paragraph.
-		/// </summary>
 		private List<string> textBuffer;
 
-		/// <summary>
-		/// This method gets called once for each cmdlet in the pipeline when the pipeline starts executing
-		/// </summary>
 		protected override void BeginProcessing()
 		{
 			textBuffer = new List<string>();
 		}
 
-		/// <summary>
-		/// This method will be called for each input received from the pipeline to this cmdlet; if no input is received, this method is not called.
-		/// </summary>
 		protected override void ProcessRecord()
 		{
-			foreach (var text in InputText)
+			foreach (var line in InputText)
 			{
-				if (string.IsNullOrWhiteSpace(text))
+				if (string.IsNullOrWhiteSpace(line))
 				{
 					FlushTextBuffer();
 
 					// If it contains whitespace, output those.
-					if(!string.IsNullOrEmpty(text)) {
-						WriteObject(text);
+					if(!string.IsNullOrEmpty(line)) {
+						WriteObject(line);
 					} else {
 						// If not, just output a blank line.
 						WriteObject("");
@@ -59,14 +47,11 @@ namespace OnlyHuman
 				}
 				else
 				{
-					textBuffer.Add(text.Trim());
+					textBuffer.Add(line.Trim());
 				}
 			}
 		}
 
-		/// <summary>
-		/// Outputs all text collected so far.
-		/// </summary>
 		private void FlushTextBuffer()
 		{
 			if (textBuffer.Count > 0)
@@ -77,9 +62,6 @@ namespace OnlyHuman
 			}
 		}
 
-		/// <summary>
-		/// This method will be called once at the end of pipeline execution; if no input is received, this method is not called
-		/// </summary>
 		protected override void EndProcessing()
 		{
 			FlushTextBuffer();
