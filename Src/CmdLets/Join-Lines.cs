@@ -4,18 +4,24 @@ using System.Management.Automation;
 namespace OnlyHuman.Text
 {
 	/// <summary>
-	/// Join lines to create paragraphs. If two lines don't have an empty line between them,
-	/// consider them a paragraph and join them. If there is a line-break between them, 
-	/// create a new paragraph.
+	/// <para type="synopsis">
+	/// Join lines to create paragraphs.
+	/// </para>
+	/// <para type="description">
+	/// Join lines to create paragraphs. If two lines don't have an empty line 
+	/// between them, consider them a paragraph and join them. If there is a 
+	/// line-break between them, create a new paragraph.
+	/// </para>
 	/// </summary>
 	[Cmdlet(VerbsCommon.Join, "Lines")]
 	[OutputType(typeof(string))]
 	public class Join_Lines : PSCmdlet
 	{
 		/// <summary>
+		/// <para type="description">
 		/// An array of text that should be turned into paragraphs.
+		/// </para>
 		/// </summary>
-		/// <value></value>
 		[Parameter(
 			Position = 0,
 			ValueFromPipeline = true
@@ -38,9 +44,12 @@ namespace OnlyHuman.Text
 					FlushTextBuffer();
 
 					// If it contains whitespace, output those.
-					if(!string.IsNullOrEmpty(line)) {
+					if (!string.IsNullOrEmpty(line))
+					{
 						WriteObject(line);
-					} else {
+					}
+					else
+					{
 						// If not, just output a blank line.
 						WriteObject("");
 					}

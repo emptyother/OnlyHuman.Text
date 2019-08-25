@@ -1,11 +1,23 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<AssemblyName>OnlyHuman.Text</AssemblyName>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>1701;1702;CS1591</NoWarn>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>bin\Debug\netstandard2.0\OnlyHuman.Text.xml</DocumentationFile>
+		<OutputPath>bin\Debug\</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<OutputPath>bin\Release\</OutputPath>
+		<DocumentationFile>bin\Release\netstandard2.0\OnlyHuman.Text.xml</DocumentationFile>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="PowerShellStandard.Library" Version="5.1.0-preview-06">
+		<PackageReference Include="PowerShellStandard.Library" Version="5.1.0">
 			<PrivateAssets>All</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="XmlDoc2CmdletDoc" Version="0.2.13">
 		</PackageReference>
 	</ItemGroup>
 </Project>
