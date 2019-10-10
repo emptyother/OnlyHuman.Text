@@ -1,0 +1,1 @@
+Attempt at creating a Powershell Core binary module.
