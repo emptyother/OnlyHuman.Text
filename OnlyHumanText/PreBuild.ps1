@@ -1,7 +1,10 @@
+using namespace System.IO
+
 [CmdLetBinding()]
 param (
 	[Parameter()][string] $ProjectName,
 	[Parameter()][string] $TargetFileName,
+	[Parameter()][System.IO.DirectoryInfo] $ProjectDir,
 	[Parameter()][System.IO.DirectoryInfo] $TargetDir,
 	[Parameter()][Uri] $ProjectUri,
 	[Parameter()][string] $Author,
@@ -9,7 +12,6 @@ param (
 	[Parameter()][string] $Copyright,
 	[Parameter()][Version] $Version,
 	[Parameter()][string] $Tags,
-	[Parameter()][Uri] $IconUri,
 	[Parameter()][string] $ReleaseNotes,
 	[Parameter()][string] $Description
 )
@@ -19,8 +21,10 @@ $ErrorActionPreference = "Stop"
 [uri]$HelpUri = "https://github.com/emptyother/OnlyHuman.Text"
 [uri]$LicenseUri = "https://choosealicense.com/licenses/isc/"
 
-$Psd1Filename = "$ProjectName.psd1"
-$Psd1Path = Join-Path $TargetDir $Psd1Filename
+$Psd1Path = Join-Path $ProjectDir "$ProjectName.psd1"
+$targetDll = [DirectoryInfo](Join-Path $TargetDir $TargetFileName)
+$RelativePath = [Path]::GetRelativePath($targetDll.Parent.Parent, $targetDll)
+$RelativePath = Join-Path "lib" $RelativePath
 
 $moduleSettings = @{
 	AliasesToExport   = @()
@@ -28,7 +32,7 @@ $moduleSettings = @{
 	FunctionsToExport = @()
 	Guid              = '8707fce4-44b8-4642-8437-b4d935731bc7'
 	PowerShellVersion = '6.0.0'
-	RootModule        = "$TargetFileName"
+	RootModule        = "$RelativePath"
 	VariablesToExport = @()
 	ClrVersion        = '4.0'
 	Path              = "$Psd1Path"
@@ -46,10 +50,6 @@ if ($Version) { $moduleSettings.Add("ModuleVersion", $Version) }
 if ($Copyright) { $moduleSettings.Add("Copyright", $Copyright) }
 if ($Company) { $moduleSettings.Add("CompanyName", $Company) }
 if ($Author) { $moduleSettings.Add("Author", $Author) }
-if ($IconUri.ToString()) {
-	if (!$IconUri.IsAbsoluteUri) { Throw "IconUri should not be a relative URI." }
-	$moduleSettings.Add("IconUri", $IconUri)
-}
 if ($ReleaseNotes) { $moduleSettings.Add("ReleaseNotes", $ReleaseNotes) }
 if ($LicenseUri.ToString()) {
 	if ($LicenseUri.IsAbsoluteUri) { 
@@ -63,5 +63,3 @@ if ($Tags) {
 	$moduleSettings.Add("Tags", $tagcollection)
 }
 New-ModuleManifest @moduleSettings
-$filenamelist = Get-ChildItem $TargetDir | ForEach-Object { $_.Name }
-Update-ModuleManifest -Path $Psd1Path -FileList $filenamelist

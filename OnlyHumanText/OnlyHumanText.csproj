@@ -1,8 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>netstandard2.1</TargetFramework>
+		<TargetFramework>netstandard2.0</TargetFramework>
 		<AssemblyName>OnlyHumanText</AssemblyName>
+		<AssemblyVersion>1.0.0</AssemblyVersion>
+		<FileVersion>1.0.0</FileVersion>
 		<NoWarn>1701;1702;CS1591</NoWarn>
 		<Authors>Tom A. Vibeto</Authors>
 		<Description>Attempt at creating a Powershell Core binary module.</Description>
@@ -11,33 +13,41 @@
 		<RepositoryUrl>https://github.com/emptyother/OnlyHuman.Text</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<NeutralLanguage>en-US</NeutralLanguage>
-		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<Company>OnlyHuman</Company>
 		<Version>1.0.0</Version>
 		<PackageReleaseNotes>Release notes</PackageReleaseNotes>
-		<PackageIconUrl>https://github.com/emptyother/OnlyHuman.Text/icon.png</PackageIconUrl>
+		<PackageIcon>icon.png</PackageIcon>
 		<PackageTags>Text, Windows, PSEdition_Core</PackageTags>
-		<PackageLicenseFile>..\LICENSE</PackageLicenseFile>
+		<PackageLicenseFile></PackageLicenseFile>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<DocumentationFile>bin\Debug\OnlyHumanText.xml</DocumentationFile>
 		<OutputPath>bin\Debug\</OutputPath>
+		<DocumentationFile>bin\Debug\OnlyHumanText.xml</DocumentationFile>
 		<DefineConstants>DEBUG;TRACE</DefineConstants>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 		<OutputPath>bin\Release\</OutputPath>
 		<DocumentationFile>bin\Release\OnlyHumanText.xml</DocumentationFile>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="PowerShellStandard.Library" Version="5.1.0">
 			<PrivateAssets>All</PrivateAssets>
 		</PackageReference>
+
+		<None Include="$(ProjectName).psd1" Pack="true" PackagePath="\">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="icon.png" Pack="true" PackagePath="\">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 
-	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	  <Exec Command="&quot;pwsh.exe&quot;  -File $(ProjectDir)PostBuild.ps1 -ProjectName $(ProjectName) -TargetFileName $(TargetFileName) -TargetDir $(TargetDir) -ProjectUri $(PackageProjectUrl) -Author &quot;$(Authors)&quot; -Company &quot;$(Company)&quot; -Copyright &quot;$(Copyright)&quot; -Version &quot;$(Version)&quot; -Tags &quot;$(PackageTags)&quot; -IconUri &quot;$(PackageIconUrl)&quot; -ReleaseNotes &quot;$(PackageReleaseNotes)&quot; -Description &quot;$(Description)&quot;" />
+	<Target Name="PreBuild" AfterTargets="PreBuildEvent">
+		<Exec Command="&quot;pwsh.exe&quot;  -File $(ProjectDir)PreBuild.ps1 -ProjectName $(ProjectName) -TargetFileName $(TargetFileName) -ProjectDir $(ProjectDir) -TargetDir $(TargetDir) -ProjectUri $(PackageProjectUrl) -Author &quot;$(Authors)&quot; -Company &quot;$(Company)&quot; -Copyright &quot;$(Copyright)&quot; -Version &quot;$(Version)&quot; -Tags &quot;$(PackageTags)&quot; -ReleaseNotes &quot;$(PackageReleaseNotes)&quot; -Description &quot;$(Description)&quot;" />
 	</Target>
 
 </Project>
