@@ -17,6 +17,7 @@
 		<PackageReleaseNotes>Release notes</PackageReleaseNotes>
 		<PackageIconUrl>https://github.com/emptyother/OnlyHuman.Text/icon.png</PackageIconUrl>
 		<PackageTags>Text, Windows, PSEdition_Core</PackageTags>
+		<PackageLicenseFile>..\LICENSE</PackageLicenseFile>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
