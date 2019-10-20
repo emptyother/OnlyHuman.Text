@@ -11,7 +11,7 @@
 		<RepositoryUrl>https://github.com/emptyother/OnlyHuman.Text</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<NeutralLanguage>en-US</NeutralLanguage>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<Company>OnlyHuman</Company>
 		<Version>1.0.0</Version>
 		<PackageReleaseNotes>Release notes</PackageReleaseNotes>
