@@ -7,7 +7,7 @@
 		<FileVersion>1.0.0</FileVersion>
 		<NoWarn>1701;1702;CS1591</NoWarn>
 		<Authors>Tom A. Vibeto</Authors>
-		<Description>Attempt at creating a Powershell Core binary module.</Description>
+		<Description>Powershell module for text files manipulation.</Description>
 		<Copyright></Copyright>
 		<PackageProjectUrl>https://github.com/emptyother/OnlyHuman.Text</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/emptyother/OnlyHuman.Text</RepositoryUrl>
@@ -30,7 +30,6 @@
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 		<OutputPath>bin\Release\</OutputPath>
 		<DocumentationFile>bin\Release\OnlyHumanText.xml</DocumentationFile>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 	<ItemGroup>
